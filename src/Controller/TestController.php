@@ -28,7 +28,7 @@ private array $users = [
 #[IsGranted('ROLE_ADMIN')]
 public function getCollection(): JsonResponse
 {
-// Якщо користувач не є адміністратором, Symfony автоматично викине 403
+
 return $this->json(['data' => $this->users], Response::HTTP_OK);
 }
 
@@ -36,7 +36,7 @@ return $this->json(['data' => $this->users], Response::HTTP_OK);
 #[IsGranted('ROLE_ADMIN')]
 public function getItem(int $id): JsonResponse
 {
-// Якщо користувач не є адміністратором, Symfony автоматично викине 403
+
 return $this->json(['data' => $this->findUserById($id)], Response::HTTP_OK);
 }
 
@@ -44,7 +44,7 @@ return $this->json(['data' => $this->findUserById($id)], Response::HTTP_OK);
 #[IsGranted('ROLE_ADMIN')]
 public function createItem(Request $request): JsonResponse
 {
-// Якщо користувач не є адміністратором, Symfony автоматично викине 403
+
 $requestData = json_decode($request->getContent(), true);
 
 if (!isset($requestData['email'], $requestData['name'])) {
@@ -70,7 +70,7 @@ return $this->json(['data' => $newUser], Response::HTTP_CREATED);
 #[IsGranted('ROLE_ADMIN')]
 public function updateItem(int $id, Request $request): JsonResponse
 {
-// Якщо користувач не є адміністратором, Symfony автоматично викине 403
+
 $user = &$this->findUserById($id);
 $requestData = json_decode($request->getContent(), true);
 
@@ -88,7 +88,7 @@ return $this->json(['data' => $user], Response::HTTP_OK);
 #[IsGranted('ROLE_ADMIN')]
 public function deleteItem(int $id): JsonResponse
 {
-// Якщо користувач не є адміністратором, Symfony автоматично викине 403
+
 foreach ($this->users as $key => $user) {
 if ($user['id'] === $id) {
 unset($this->users[$key]);
